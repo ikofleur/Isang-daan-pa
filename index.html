@@ -115,7 +115,68 @@ async function clearLetter(id){
  if(error){alert("Clear failed: "+error.message);return} closeModal();await loadLetters();
 }
 function closeModal(){$("#modal").classList.remove("show")}
-$("#enter").onclick=login;$("#password").onkeydown=e=>{if(e.key==="Enter")login()};
+$("#enter").onclick=login;
+$("#password").onkeydown=e=>{if(e.key==="Enter")login()};
+
+sb?.auth.onAuthStateChange((event, newSession)=>{
+  if(event==="PASSWORD_RECOVERY"){
+    showPasswordReset();
+  }
+});
+
+function showPasswordReset(){
+  $("#login").classList.remove("hidden");
+  $("#app").classList.add("hidden");
+
+  const card=document.querySelector(".login-card");
+
+  card.innerHTML=`
+    <input id="newPassword" type="password"
+      placeholder="Enter your new private key"
+      autocomplete="new-password">
+
+    <input id="confirmPassword" type="password"
+      placeholder="Confirm your new private key"
+      autocomplete="new-password"
+      style="margin-top:10px">
+
+    <button class="primary" id="updatePassword">
+      Save new private key
+    </button>
+
+    <div class="error" id="error"></div>
+  `;
+
+  $("#updatePassword").onclick=async()=>{
+    const password=$("#newPassword").value;
+    const confirm=$("#confirmPassword").value;
+
+    if(password.length<6){
+      showError("Your private key must be at least 6 characters.");
+      return;
+    }
+
+    if(password!==confirm){
+      showError("The private keys don't match.");
+      return;
+    }
+
+    showError("Saving quietly…");
+
+    const {error}=await sb.auth.updateUser({password});
+
+    if(error){
+      showError(error.message);
+      return;
+    }
+
+    showError("Private key updated. You can now enter the collection.");
+
+    setTimeout(()=>{
+      location.reload();
+    },1200);
+  };
+}
 $("#logout").onclick=async()=>{if(sb)await sb.auth.signOut();location.reload()};
 $("#refresh").onclick=loadLetters;$("#modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
 $("#mode").onclick=()=>{if(role==="admin"){role="reader";$("#mode").textContent="Admin mode";$("#roleLabel").textContent="reader view";loadLetters()}};
