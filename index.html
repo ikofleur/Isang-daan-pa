@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Isang Daang Liham Para Kay Angel</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--ice:#dff6ff;--ink:#17232c;--muted:#6d7d86;--paper:#fbfdfe;--line:#d9e8ee;--shadow:0 18px 60px #16303b18}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at 15% 10%,#fff 0,#eef9fc 34%,#e8f4f7 100%);min-height:100vh}
+button,input,textarea{font:inherit}button{cursor:pointer}.screen{min-height:100vh;display:grid;place-items:center;padding:28px}.login{width:min(520px,100%);text-align:center}.eyebrow{letter-spacing:.22em;text-transform:uppercase;font:11px Arial,sans-serif;color:#78909a}.login h1{font-size:clamp(42px,9vw,72px);line-height:.9;margin:22px 0 12px;font-weight:400}.login .sub{font-size:18px;font-style:italic;color:#63747c;margin-bottom:34px}.login-card{background:#ffffffc9;border:1px solid #fff;padding:28px;border-radius:24px;box-shadow:var(--shadow);backdrop-filter:blur(12px)}.login-card input{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:13px;outline:0}.login-card input:focus{border-color:#9cc9d7}.primary{border:0;background:#17333e;color:white;padding:13px 20px;border-radius:12px;margin-top:12px}.hint{font:11px Arial,sans-serif;color:#8a9aa1;margin-top:12px}.error{color:#a34d55;font:12px Arial,sans-serif;min-height:16px}
+header{max-width:1120px;margin:auto;padding:48px 24px 22px;display:flex;justify-content:space-between;gap:20px;align-items:end}.brand small{font:10px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#80929a}.brand h2{font-size:clamp(30px,5vw,48px);font-weight:400;margin:8px 0 4px}.brand p{margin:0;font-style:italic;color:#65777e}.actions{display:flex;gap:8px;flex-wrap:wrap}.ghost{border:1px solid var(--line);background:#ffffffaa;border-radius:10px;padding:9px 12px;color:#51656e;font:12px Arial,sans-serif}
+main{max-width:1120px;margin:auto;padding:20px 24px 80px}.progress{display:flex;justify-content:space-between;align-items:center;font:11px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#778a92;margin-bottom:14px}.bar{height:4px;background:#dcecf1;border-radius:9px;margin-bottom:28px}.bar i{display:block;height:100%;background:#88b9c8;border-radius:9px;transition:.3s}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card{min-height:155px;text-align:left;background:#fffffff0;border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:0 8px 28px #24434d0a;transition:.2s;position:relative}.card:hover{transform:translateY(-3px);box-shadow:0 15px 40px #24434d18}.num{font:10px Arial,sans-serif;letter-spacing:.14em;color:#8aa0a8}.card h3{font-size:19px;font-weight:400;margin:18px 0 8px}.date{font:11px Arial,sans-serif;color:#8a999f}.locked{color:#9ba8ad;font-style:italic}.card .edit{position:absolute;right:12px;top:12px;font:10px Arial,sans-serif;border:1px solid var(--line);background:#f7fcfe;border-radius:8px;padding:6px 8px;color:#61767e}
+footer{text-align:center;padding:30px 20px 50px;color:#72848b;font-size:13px;line-height:1.8;font-style:italic}.modal{position:fixed;inset:0;background:#102b3380;display:none;place-items:center;padding:20px;z-index:5}.modal.show{display:grid}.modal-box{width:min(720px,100%);max-height:90vh;overflow:auto;background:var(--paper);border-radius:22px;padding:30px;box-shadow:0 30px 100px #102b3340}.modal-top{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:transparent;font-size:25px;color:#74858c}.letter-title{font-size:38px;font-weight:400;margin:18px 0 6px}.letter-date{font:11px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#82949a}.letter-body{white-space:pre-wrap;font-size:18px;line-height:1.9;margin-top:28px}.field{margin:12px 0}.field label{display:block;font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#72848b;margin-bottom:6px}.field input,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:white}.field textarea{min-height:260px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.danger{border:1px solid #e4c9cd;background:#fff6f7;color:#9b5960;padding:10px 14px;border-radius:10px}.hidden{display:none!important}.status{font:11px Arial,sans-serif;color:#78909a;margin-top:8px;min-height:16px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}header{align-items:start;flex-direction:column}.actions{width:100%}}@media(max-width:480px){.grid{grid-template-columns:1fr 1fr;gap:9px}.card{min-height:135px;padding:13px}.card h3{font-size:16px}.row{grid-template-columns:1fr}.login h1{font-size:48px}}
+</style>
+</head>
+<body>
+<section id="login" class="screen">
+<div class="login"><div class="eyebrow">a private collection</div><h1>100</h1>
+<div class="sub">A hundred letters, a thousand words, and an endless thoughts</div>
+<div class="login-card">
+<input id="password" type="password" placeholder="Enter the private key" autocomplete="current-password">
+<button class="primary" id="enter">Enter quietly</button>
+<div class="error" id="error"></div><div class="hint">This little place is meant to be kept between us.</div>
+</div></div>
+</section>
+
+<section id="app" class="hidden">
+<header><div class="brand"><small>for angel, a hundred times more</small><h2>Isang Daang Liham<br>Para Kay Angel</h2></div>
+<div class="actions"><button class="ghost" id="mode">Reader mode</button><button class="ghost" id="refresh">Refresh</button><button class="ghost" id="logout">Lock</button></div></header>
+<main><div class="progress"><span id="count">0 / 100 written</span><span id="roleLabel">reader</span></div><div class="bar"><i id="bar"></i></div><div class="grid" id="grid"></div></main>
+<footer>ice blue eyes staring<br>like the floor<br>because you've caught them twice before</footer>
+</section>
+<div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
+
+<script>
+/* === SET THESE FOUR VALUES AFTER CREATING YOUR SUPABASE PROJECT === */
+const SUPABASE_URL = "https://dtsykoiyxbzztbejivgi.supabase.co";
+const SUPABASE_KEY = "sb_publishable_0mrfhY47tFAXB2d1dVDAZw_o52CQ9bX";
+const ADMIN_EMAIL = "admin@isangdaangliham.local";
+const READER_EMAIL = "reader@isangdaangliham.local";
+/* The emails above are identifiers only. The actual passwords live in Supabase Auth. */
+
+const configured = !SUPABASE_URL.includes("PASTE_") && !SUPABASE_KEY.includes("PASTE_");
+let sb = configured ? supabase.createClient(SUPABASE_URL,SUPABASE_KEY) : null;
+let role="reader", session=null, letters=[];
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function showError(msg){$("#error").textContent=msg}
+function configuredCheck(){if(!configured){showError("The website is not connected yet. Add your Supabase URL and publishable key in index.html.");return false}return true}
+
+async function login(){
+ if(!configuredCheck())return;
+ const p=$("#password").value.trim(); if(!p)return showError("Enter the private key.");
+ showError("Opening quietly…");
+ for(const [candidate, candidateRole] of [[ADMIN_EMAIL,"admin"],[READER_EMAIL,"reader"]]){
+   const {data,error}=await sb.auth.signInWithPassword({email:candidate,password:p});
+   if(!error && data.session){session=data.session;role=candidateRole;await openApp();return}
+ }
+ showError("That key doesn't open this collection.");
+}
+
+async function openApp(){
+ $("#login").classList.add("hidden");$("#app").classList.remove("hidden");
+ $("#mode").classList.toggle("hidden",role!=="admin");
+ $("#roleLabel").textContent=role==="admin"?"admin access":"reader access";
+ await loadLetters();
+}
+async function loadLetters(){
+ const query=role==="admin"
+   ? sb.from("letters").select("*").order("id")
+   : sb.from("letters").select("*").eq("published",true).order("id");
+ const {data,error}=await query;
+ if(error){alert("Could not load the letters: "+error.message);return}
+ letters=data||[];render();
+}
+function render(){
+ const written=letters.filter(x=>x.title||x.body).length;
+ $("#count").textContent=`${written} / 100 written`;$("#bar").style.width=`${written}%`;
+ const byId=new Map(letters.map(x=>[x.id,x]));
+ let html="";
+ for(let i=1;i<=100;i++){
+   const x=byId.get(i), ready=x&&(x.title||x.body);
+   html+=`<button class="card" data-id="${i}"><span class="num">NO. ${String(i).padStart(3,"0")}</span>
+   ${ready?`<h3>${esc(x.title||"Untitled")}</h3><div class="date">${esc(x.date||"")}</div>`:`<h3 class="locked">${role==="admin"?"Not written yet.":"Not written yet."}</h3>`}
+   ${role==="admin"?`<span class="edit">Edit</span>`:""}</button>`;
+ }
+ $("#grid").innerHTML=html;
+ document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openLetter(+c.dataset.id));
+}
+function openLetter(id){
+ const x=letters.find(a=>a.id===id)||{id,title:"",date:"",body:"",published:false};
+ if(role!=="admin" && !x.published)return;
+ $("#modalBox").innerHTML=role==="admin"?editor(x):reader(x);
+ $("#modal").classList.add("show");
+ if(role==="admin"){$("#save").onclick=()=>saveLetter(x.id);$("#clear").onclick=()=>clearLetter(x.id)}
+}
+function reader(x){return `<div class="modal-top"><span class="num">NO. ${String(x.id).padStart(3,"0")}</span><button class="close" onclick="closeModal()">×</button></div><div class="letter-title">${esc(x.title||"Untitled")}</div><div class="letter-date">${esc(x.date||"")}</div><div class="letter-body">${esc(x.body||"")}</div>`}
+function editor(x){return `<div class="modal-top"><span class="num">EDIT NO. ${String(x.id).padStart(3,"0")}</span><button class="close" onclick="closeModal()">×</button></div>
+<div class="field"><label>Title</label><input id="title" value="${esc(x.title)}"></div>
+<div class="row"><div class="field"><label>Date</label><input id="date" value="${esc(x.date)}"></div>
+<div class="field"><label>Visibility</label><div style="padding:12px 0"><input id="published" type="checkbox" ${x.published?"checked":""}> Published</div></div></div>
+<div class="field"><label>Letter</label><textarea id="body">${esc(x.body)}</textarea></div>
+<div class="modal-actions"><button class="danger" id="clear">Clear</button><button class="primary" id="save">Save letter</button></div>`}
+async function saveLetter(id){
+ const payload={title:$("#title").value,date:$("#date").value,body:$("#body").value,published:$("#published").checked};
+ const {error}=await sb.from("letters").update(payload).eq("id",id);
+ if(error){alert("Save failed: "+error.message);return} closeModal();await loadLetters();
+}
+async function clearLetter(id){
+ if(!confirm("Clear this letter?"))return;
+ const {error}=await sb.from("letters").update({title:"",date:"",body:"",published:false}).eq("id",id);
+ if(error){alert("Clear failed: "+error.message);return} closeModal();await loadLetters();
+}
+function closeModal(){$("#modal").classList.remove("show")}
+$("#enter").onclick=login;$("#password").onkeydown=e=>{if(e.key==="Enter")login()};
+$("#logout").onclick=async()=>{if(sb)await sb.auth.signOut();location.reload()};
+$("#refresh").onclick=loadLetters;$("#modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
+$("#mode").onclick=()=>{if(role==="admin"){role="reader";$("#mode").textContent="Admin mode";$("#roleLabel").textContent="reader view";loadLetters()}};
+</script>
+</body>
+</html>
